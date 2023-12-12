@@ -82,3 +82,26 @@ h2 {
 .row {
     flex-wrap : wrap;
 }
+.card-text {
+    background-color: blueviolet;
+    color:white;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Consolas',serif;
+    text-transform: uppercase;
+    
+}
+.card-body {
+    background-color: rgb(242, 167, 255);
+}
+article {
+    display : inline-flex;
+    flex-direction: row;
+    flex-wrap : wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius : 5px;
+}
