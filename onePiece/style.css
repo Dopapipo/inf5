@@ -6,11 +6,14 @@
     font-family: 'Consolas',serif;
 
 }
+body {
+    background-color: rgb(220, 189, 249);
+}
 header {
     text-align: center;
     background-color: black;
     color: white;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 nav ul li {
     display: inline;
@@ -19,10 +22,17 @@ nav ul li {
     border: 1px solid black;
     margin:3px;
 }
-
+nav ul li a {
+    display:inline-flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 nav ul li a {
     color:rgb(175, 50, 152);
 
+}
+.navheader {
+   background-color: rgb(231, 178, 220);
 }
 ul li a:hover {
    text-decoration: none;
