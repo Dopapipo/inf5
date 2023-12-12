@@ -93,7 +93,9 @@ h2 {
 }
 .card-body {
     background-color: rgb(242, 167, 255);
+   
 }
+
 article {
     display : inline-flex;
     flex-direction: row;
