@@ -1,0 +1,67 @@
+{% extends "layout.twig" %}
+
+{% block nav %}
+	<ul>
+		<a href="?page=/">
+			<li>Home</li>
+		</a>
+
+		<a href="?page=signup">
+			<li>Sign Up</li>
+		</a>
+		<a id="loginButton">
+			<li id="loginli">Login</li>
+		</a>
+
+	</ul>
+{% endblock %}
+
+{% block main %}
+	<main>
+		{% if isValid is same as(false) %}
+			<div class="alert alert-warning" role="alert">
+                {{errorMessage}}
+			</div>
+        {% elseif (isValid is not same as "default") %} 
+            <div class="alert alert-success" role="alert">
+                Signup success!
+            </div>
+        {% endif %}
+		<form class="placeHolder" method="post"  action="index.php?page=signup&action=create">
+
+			<div class="mb-3">
+				<label for="exampleFormControlInput1" class="form-label">Email address</label>
+				<input type="email" name="mail" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+			</div>
+
+			<div class="mb-3">
+				<label for="exampleFormControlInput1" class="form-label">Repeat email address</label>
+				<input type="email" name="mailre" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+			</div>
+			<div class="mb-3">
+				<label for="inputPassword5" class="form-label">Password</label>
+				<input type="password" name="password" id="inputPassword5" class="form-control" placeholder="Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.">
+			</div>
+			<div class="mb-3">
+				<label for="inputPassword5" class="form-label">Repeat Password</label>
+				<input type="password" name="passwordre" id="inputPassword5" class="form-control" placeholder="Repeat password">
+			</div>
+			<div class="mb-3">
+				<label for="exampleFormControlInput1" class="form-label">Nickname</label>
+				<input type="text" name="nickname" class="form-control" id="exampleFormControlInput1" placeholder="Enter your displayed nickname">
+			</div>
+			<div class="mb-3 form-check">
+				<input type="checkbox" class="form-check-input" id="exampleCheck1">
+				<label class="form-check-label" for="exampleCheck1">I am not a bot</label>
+			</div>
+			<button type="submit" class="btn btn-primary">Sign-up</button>
+
+		</form>
+
+	</main>
+{% endblock %}
+{% block footer %}
+    <footer>
+        <p>Thanks for signing up!</p>
+    </footer>
+{% endblock %}
