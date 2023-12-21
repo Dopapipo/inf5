@@ -20,4 +20,8 @@ abstract class BaseController
         return $twig->render($template, $variables);
     }
     public abstract function renderDefault();
+
+    public function headHome() {
+        header("Location: index.php?page=/");
+    }
 }

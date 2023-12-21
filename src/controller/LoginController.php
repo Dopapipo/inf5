@@ -51,7 +51,15 @@ class LoginController extends BaseController
                         echo $this->render('login.twig', ["session" => $_SESSION]);
                     }
 
-                } else {
+                } elseif ($repo->tryAdminLogin($username, $password) != false) {
+                    session_start();
+                    $_SESSION["loggedin"] = true;
+                    $_SESSION["admin"] = true;
+                    $_SESSION["username"] = $username;
+                    echo $this->render('login.twig', ["session" => $_SESSION]);
+                }
+                
+                else {
                     $login_err = "Invalid username or password.";
                 }
             }else {

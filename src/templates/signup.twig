@@ -6,12 +6,9 @@
 			<li>Home</li>
 		</a>
 
-		<a href="?page=signup">
-			<li>Sign Up</li>
-		</a>
-		<a id="loginButton">
-			<li id="loginli">Login</li>
-		</a>
+		{{ block("signupButton", "layout.twig") }}
+
+		{{ block("loginButton", "layout.twig") }}
 
 	</ul>
 {% endblock %}

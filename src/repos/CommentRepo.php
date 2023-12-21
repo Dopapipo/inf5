@@ -11,13 +11,16 @@ class CommentRepo extends DatabaseResolver {
     public function addComment($comment) {
         $table = $this->getTable();
         // Prepare INSERT query
-        $query = "INSERT INTO $table (name, comment, created_at) VALUES (:name, :comment, CURRENT_TIMESTAMP)";
+        $query = "INSERT INTO $table (name, comment, author, created_at) 
+        VALUES (:name, :comment, :author, CURRENT_TIMESTAMP)";
         // Prepare and execute the statement
         $statement = $this->getDatabase()->prepare($query);
         $name = $comment->getName();
         $statement->bindParam(':name', $name);
         $content = $comment->getContent();
         $statement->bindParam(':comment', $content);
+        $author = $comment->getAuthor();
+        $statement->bindParam(':author', $author);
         $statement->execute();
     }
     public function deleteComment($id) {

@@ -5,6 +5,7 @@ use PDO;
 use App\DatabaseResolver;
 use App\entities\Account;
     class AccountRepo extends DatabaseResolver {
+        private $admintable = "adminlogin";
         public function __construct() {
             parent::__construct("accounts");
         }
@@ -79,6 +80,18 @@ use App\entities\Account;
             $result = $this->getAccountByName($name);
             if ($result != false && password_verify($password, $result["password"])) {
                     return $result;
+            }
+            return false;
+        }
+        public function tryAdminLogin($name, $password) {
+            $table = $this->admintable;
+            $query = "SELECT * FROM $table WHERE username = :name";
+            $statement = $this->getDatabase()->prepare($query);
+            $statement->bindParam(":name", $name);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            if ($result != false && password_verify($password, $result["password"])) {
+                return $result;
             }
             return false;
         }

@@ -29,12 +29,14 @@ class CommentController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'];
             $content = $_POST['comment'];
-
+            session_start();
+            $author = $_SESSION == null ? "Anonymous" : $_SESSION["username"];
             // Add the new comment to the database
-            $comment = new Comment($name, $content, "CURRENT_TIMESTAMP");
+            $comment = new Comment($name, $content, $author);
             $this->commentModel->addComment($comment);
 
         }
+        $this->headHome();   
     }
 
     public function delete() {
@@ -42,6 +44,7 @@ class CommentController extends BaseController
             $id = $_GET["id"];
             $this->commentModel->deleteComment($id);
         }
+        $this->headHome();
     }
 
     public function renderDefault() {

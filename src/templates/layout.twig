@@ -23,7 +23,8 @@
 						One Piece</strong>
 					the best manga of all time?</h1>
 				{% if session.loggedin %}
-					<h2>Welcome {{session.username}}</h2>
+					<h2>Welcome
+						{{session.username}}</h2>
 					<a href="?page=login&action=logout">Logout</a>
 				{% endif %}
 			{% endblock %}
@@ -46,12 +47,26 @@
 					<a href="#footer">
 						<li>Leave a comment</li>
 					</a>
-					<a href="?page=signup">
-						<li>Sign Up</li>
-					</a>
-					<a id="loginButton" href = "?page=login">
-						<li id="loginli">Login</li>
-					</a>
+					{% block signupButton %}
+						{% if session == null %}
+
+							<a href="?page=signup">
+								<li>Sign Up</li>
+
+							</a>
+						{% endif %}
+					{% endblock %}
+					{% block loginButton %}
+						{% if session.loggedin %}
+							<a id="loginButton" href="?page=login&action=logout">
+								<li id="loginli">Logout</li>
+							</a>
+						{% else %}
+							<a id="loginButton" href="?page=login">
+								<li id="loginli">Login</li>
+							</a>
+						{% endif %}
+					{% endblock %}
 
 				</ul>
 			{% endblock %}
@@ -77,9 +92,9 @@
 			<footer id="footer">
 				<h2>Leave a comment</h2>
 				<div class="placeHolder">
-					<form action="?page=comment" method="post" action="create">
+					<form action="?page=comment&action=create" method="post" action="create">
 						<div class="mb-3">
-							<label for="commentUsername" class="form-label">Username</label>
+							<label for="commentUsername" class="form-label">Title</label>
 							<input type="text" class="form-control" id="commentUsername" name="name">
 						</div>
 
@@ -98,21 +113,22 @@
 				<h2>Comments</h2>
 				{% for comment in comments %}
 					<div id="comment">
-																																	
+
 						<h3 id="commenterName">
 							<strong>{{comment.name}}</strong>
 						</h3>
 						<p id="commentText">
 							{{comment.comment}}</p>
+						<p id="commentDate"> Author : {{comment.author}}</p>
 						<small id='commentDate' style="background-color:purple;color:azure;">{{comment.created_at}}</small>
-						{% if logged %}
-                        <a class = "deletebutton" href="?page=delete&id={{comment.id}}">Delete</a>
+
+						{% if (session.admin or session.username == comment.author)  %}
+							<a class="deletebutton" href="?page=comment&id={{comment.id}}&action=delete">Delete</a>
 						{% endif %}
 					</div>
-					{% endfor %}
-				</div>
-			</footer>
-		{% endblock %}
-		{# {% block script %} <script src="index.js" async></script>
-	{% endblock %} #}
-</body></html>
+				{% endfor %}
+			</div>
+		</body>
+	</html>
+</footer>{% endblock %}{# {% block script %} <script src="index.js" async></script>
+				{% endblock %} #}</body></html>
